@@ -1,5 +1,7 @@
 import CheckOutForm from "../components/CheckOutForm/CheckOutForm";
 import Doctors from "../components/Doctors/Doctors";
+import MyAppointment from "../components/MyAppointment/MyAppointment";
+import UpdateAppointment from "../components/MyAppointment/UpdateAppointment";
 import Login from "../Home/Others/Login";
 import Register from "../Home/Others/Register";
 import Main from "../layout/Main/Main";
@@ -28,8 +30,18 @@ const router = createBrowserRouter([
                 element: <Doctors></Doctors>
             },
             {
-                path: '/checkoutform',
-                element: <CheckOutForm></CheckOutForm>
+                path: '/checkoutform/:id',
+                element: <CheckOutForm></CheckOutForm>,
+                loader: ({params}) => fetch(`http://localhost:5000/doctors/${params.id}`)
+            },
+            {
+                path: '/myappointments',
+                element: <MyAppointment></MyAppointment>
+            },
+            {
+                path: '/updateappointment/:id',
+                element: <UpdateAppointment></UpdateAppointment>,
+                loader: ({params}) => fetch(`http://localhost:5000/myappointment/${params.id}`)
             }
         ]
     }

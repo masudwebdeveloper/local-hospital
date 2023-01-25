@@ -1,14 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
-const CheckOutForm = () => {
+const UpdateAppointment = () => {
   const doctor = useLoaderData();
-  const {user} = useContext(AuthContext);
+  console.log(doctor);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(doctor, user);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const {
@@ -25,10 +24,9 @@ const CheckOutForm = () => {
       minute,
       ampm,
     } = data;
-    console.log(minute);
     const date = `${day} ${month}, ${year}`;
     const time = `${hour}:${minute} ${ampm}`;
-    const appointmentData = {
+    const updateData = {
       name,
       phone: number,
       email,
@@ -39,25 +37,25 @@ const CheckOutForm = () => {
       time,
     };
 
-    fetch('http://localhost:5000/appointments',{
-      method: 'POST',
+    fetch(`http://localhost:5000/appointments/${doctor._id}`, {
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
-      body: JSON.stringify(appointmentData)
+      body: JSON.stringify(updateData),
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data.acknowledged){
-        navigate('/myappointments')
-      }
-    })
-    .catch(err=> console.error(err))
-
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          navigate("/myappointments");
+        }
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <div className="w-3/5 mx-auto bg-gray-300 p-10 text-center mt-10 rounded">
-      <h1 className="text-5xl text-gray-800 mb-10">Make Appointment</h1>
+      <h1 className="text-5xl text-gray-800 mb-5">Make Appointment</h1>
+      <p className="text-2xl font-semibold mb-5">Please currectly filup all the filed</p>
       <form onSubmit={handleSubmit(onSubmit)} action="">
         <div className="flex justify-center gap-5">
           <div className="w-1/2">
@@ -67,7 +65,7 @@ const CheckOutForm = () => {
             <input
               type="text"
               name="name"
-              defaultValue={user?.displayName}
+              defaultValue={doctor.name}
               className="input input-bordered bg-white text-xs w-full py-1 px-4 rounded mt-2 mb-3"
               placeholder="Full Name"
               required
@@ -79,6 +77,7 @@ const CheckOutForm = () => {
             <input
               type="text"
               name="number"
+              defaultValue={doctor.phone}
               className="input input-bordered bg-white text-xs w-full py-1 px-4 rounded mt-2 mb-3"
               placeholder="number"
               required
@@ -90,11 +89,10 @@ const CheckOutForm = () => {
             <input
               type="email"
               name="email"
-              defaultValue={user?.email}
+              defaultValue={doctor.email}
               className="input input-bordered bg-white text-xs w-full py-1 px-4 rounded mt-2 mb-3"
               placeholder="email"
               required
-              readOnly
               {...register("email")}
             />
             <label htmlFor="" className="mt-5">
@@ -103,14 +101,12 @@ const CheckOutForm = () => {
             <input
               type="text"
               name="specialty"
-              defaultValue={doctor.department}
-              readOnly
+              defaultValue={doctor.specialty}
               className="input input-bordered bg-white text-xs w-full py-1 px-4 rounded mt-2 mb-3"
               placeholder="Full Name"
               required
               {...register("specialty")}
             />
-            
           </div>
           <div className="w-1/2">
             <label htmlFor="">
@@ -119,11 +115,10 @@ const CheckOutForm = () => {
             <input
               type="text"
               name="doctorName"
-              defaultValue={doctor.name}
+              defaultValue={doctor.doctorName}
               className="input input-bordered bg-white text-xs w-full py-1 px-4 rounded mt-2 mb-3"
               placeholder="Full Name"
               required
-              readOnly
               {...register("doctorName")}
             />
             <label htmlFor="">
@@ -132,6 +127,7 @@ const CheckOutForm = () => {
             <select
               {...register("gender")}
               name="gender"
+              required
               className="select select-bordered mt-2 w-full mb-3"
             >
               <option disabled selected>
@@ -146,6 +142,7 @@ const CheckOutForm = () => {
             <div className="flex mb-3">
               <select
                 name="month"
+                required
                 {...register("month")}
                 className="select select-bordered mt-2"
               >
@@ -167,6 +164,7 @@ const CheckOutForm = () => {
               </select>
               <select
                 name="day"
+                required
                 {...register("day")}
                 className="select select-bordered mt-2 ml-2"
               >
@@ -179,6 +177,7 @@ const CheckOutForm = () => {
               </select>
               <select
                 {...register("year")}
+                required
                 name="year"
                 className="select select-bordered mt-2 ml-2"
               >
@@ -196,6 +195,7 @@ const CheckOutForm = () => {
             <div className="flex">
               <select
                 {...register("hour")}
+                required
                 name="hour"
                 className="select select-bordered mt-2"
               >
@@ -208,6 +208,7 @@ const CheckOutForm = () => {
               </select>
               <select
                 name="minute"
+                required
                 {...register("minute")}
                 className="select select-bordered mt-2 ml-2"
               >
@@ -220,6 +221,7 @@ const CheckOutForm = () => {
               </select>
               <select
                 {...register("ampm")}
+                required
                 name="ampm"
                 className="select select-bordered mt-2 ml-2"
               >
@@ -229,10 +231,10 @@ const CheckOutForm = () => {
             </div>
           </div>
         </div>
-        <button className="btn mt-5">Submit</button>
+        <button className="btn bg-green-400 mt-5">Save</button>
       </form>
     </div>
   );
 };
 
-export default CheckOutForm;
+export default UpdateAppointment;

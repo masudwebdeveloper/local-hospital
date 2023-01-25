@@ -1,23 +1,20 @@
 [
     {
-        "id": 1,
-        "name": "Dr. Mohammad Najim Uddin",
+        "name": "Dr. Mohammad Rahim Uddin",
         "specialist": "MBBS, MCPS (Medicine), MD (Neurology)",
         "title": "consultant",
         "department": "Neurology",
         "image": "https://www.evercarebd.com/chattogram/oldsite/consultant/consultant_images/1658135132.jpg"
     },
     {
-        "id": 2,
-        "name": "Dr. Hamidul Haque",
+        "name": "Dr. Rorimulla Haque",
         "specialist": "MBBS (DMC), MRCP (UK), FRCP (London)",
         "title": "Senior Consultant",
         "department": "Neurology",
         "image": "https://www.evercarebd.com/chattogram/oldsite/consultant/consultant_images/1658136370.jpg"
     },
     {
-        "id": 3,
-        "name": "Dr. A. M. Shafayet Hossain",
+        "name": "Dr. A. M. Addan Hossain",
         "specialist": "MBBS (CMC), MD (Neurology), FRCP   ",
         "title": "Associate Consultant",
         "department": "Neurology",

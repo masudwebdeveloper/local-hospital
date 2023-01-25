@@ -1,24 +1,46 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import SocialLink from "../Share/SocialLink";
 
 const Login = () => {
+  const {Login} = useContext(AuthContext);
   const [check, setCheck] = useState(true);
+  const navigate = useNavigate();
   const handleCheck = () => {
     setCheck(!check);
   };
+  
+
+  const { register, handleSubmit } = useForm();
+
+  const handleSignIn = (data) => {
+    const { email, password } = data;
+    console.log(email, password);
+    Login(email, password)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+      navigate('/')
+    })
+    .catch(err => console.error(err.message))
+
+  };
+
   return (
     <div className="">
       <div className="lg:max-w-[1350px] mx-auto py-10">
         <div className="md:w-1/4 rounded-sm mx-auto text-center bg-white shadow-2xl py-5">
           <h2 className="text-gray-700 font-bold text-xl">Please Login</h2>
-          <form action="">
+          <form onSubmit={handleSubmit(handleSignIn)}>
             <input
               type="email"
               name="email"
               className="input text-xs input-bordered w-4/5 py-2 px-4 rounded mt-3"
               placeholder="email"
               required
+              {...register("email")}
             />
             <input
               type="password"
@@ -26,6 +48,7 @@ const Login = () => {
               className="input text-xs input-bordered w-4/5 py-2 px-4 rounded mt-3"
               placeholder="Password"
               required
+              {...register("password")}
             />
             <div className="border-t-2 mt-5 w-4/5 mx-auto"></div>
             <div className="flex w-4/5 justify-between mt-4 mx-auto">

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLink from "../Share/SocialLink";
 import "./Register.modules.css";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ const Register = () => {
   const [check, setCheck] = useState(true);
   const [passwordError, setPasswordError] = useState("");
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -29,6 +30,7 @@ const Register = () => {
     createUser(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      navigate('/login')
     })
     .catch(err=> console.error(err))
     console.log(name, number, email, password, confirmPassword);

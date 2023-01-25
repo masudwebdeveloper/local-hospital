@@ -6,7 +6,7 @@ const Doctors = () => {
   const { data: doctors = [] } = useQuery({
     queryKey: ["doctorsData"],
     queryFn: async () => {
-      const res = await fetch("DoctorsData.json");
+      const res = await fetch("http://localhost:5000/doctors");
       const data = await res.json();
       return data;
     },
