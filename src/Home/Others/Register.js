@@ -8,12 +8,11 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 const Register = () => {
   const [check, setCheck] = useState(true);
   const [passwordError, setPasswordError] = useState("");
-  const { createUser } = useContext(AuthContext);
+  const { createUser,updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const handleCheck = () => {
@@ -31,6 +30,10 @@ const Register = () => {
       const user = result.user;
       console.log(user);
       navigate('/login')
+      updateUser({displayName: name})
+      .then(()=>{
+        console.log("Update profile name");
+      })
     })
     .catch(err=> console.error(err))
     console.log(name, number, email, password, confirmPassword);

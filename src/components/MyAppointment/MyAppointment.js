@@ -36,55 +36,55 @@ const MyAppointment = () => {
     }
   };
   return (
-    <div class="overflow-x-auto">
-      <table class="lg:min-w-[1240px] mx-auto divide-y divide-gray-200 text-sm">
-        <thead class="bg-gray-100">
+    <div className="overflow-x-auto">
+      <table className="lg:min-w-[1240px] mx-auto divide-y divide-gray-200 text-sm">
+        <thead className="bg-gray-100">
           <tr>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               Patient's Name
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               Email
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               Phone
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               Date
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               Time
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+            <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900">
               action
             </th>
           </tr>
         </thead>
 
-        <tbody class="divide-y divide-gray-200">
+        <tbody className="divide-y divide-gray-200">
           {myAppointments.map((appointment) => (
             <tr>
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                 {appointment.name}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {appointment.email}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {appointment.phone}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {appointment.date}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {appointment.time}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-red-500">
-                <button onClick={() => handleDelete(appointment._id)}>
+              <td className="whitespace-nowrap px-4 py-2 text-center">
+                <button className="mr-5 hover:bg-gray-200 p-1 rounded-sm text-red-500 hover:text-red-700 " onClick={() => handleDelete(appointment._id)}>
                   Delete
                 </button>
-                <Link to={`/updateappointment/${appointment._id}`}>
-                  Update
+                <Link className="text-green-600 hover:bg-gray-200 p-1 rounded-sm hover:text-green-800" to={`/updateappointment/${appointment._id}`}>
+                  Edit
                 </Link>
               </td>
             </tr>

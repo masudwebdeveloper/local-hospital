@@ -2,6 +2,7 @@ import CheckOutForm from "../components/CheckOutForm/CheckOutForm";
 import Doctors from "../components/Doctors/Doctors";
 import MyAppointment from "../components/MyAppointment/MyAppointment";
 import UpdateAppointment from "../components/MyAppointment/UpdateAppointment";
+import Home from "../Home/Home";
 import Login from "../Home/Others/Login";
 import Register from "../Home/Others/Register";
 import Main from "../layout/Main/Main";
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <></>
+                element: <Home></Home>
             },
             {
                 path: '/login',
