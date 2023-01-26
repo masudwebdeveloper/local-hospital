@@ -35,8 +35,8 @@ const Allusers = () => {
     }
   };
   return (
-    <div className="overflow-x-auto">
-      <table className="lg:min-w-[1240px] mx-auto divide-y divide-gray-200 text-sm">
+    <div className="overflow-x-auto mt-5">
+      <table className="lg:min-w-[800px] mx-auto divide-y divide-gray-200 text-sm">
         <thead className="bg-gray-100">
           <tr>
             <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
@@ -47,7 +47,7 @@ const Allusers = () => {
             </th>
 
             <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900">
-              action
+              Action
             </th>
           </tr>
         </thead>

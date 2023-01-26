@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -8,13 +8,22 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-const queryClient = new QueryClient();
+import Loader from "./components/Loader/Loader";
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} fall>
+        <Suspense fallback={<Loader></Loader>}>
         <App />
+        </Suspense>
       </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>

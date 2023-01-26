@@ -7,6 +7,7 @@ import UpdateAppointment from "../components/MyAppointment/UpdateAppointment";
 import Home from "../Home/Home";
 import Login from "../Home/Others/Login";
 import Register from "../Home/Others/Register";
+import ErrorPage from "../Home/Share/ErrorPage/ErrorPage";
 import Main from "../layout/Main/Main";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

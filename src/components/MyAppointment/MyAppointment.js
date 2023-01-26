@@ -10,7 +10,7 @@ const MyAppointment = () => {
     queryKey: ["myAppointments"],
     queryFn: async () => {
       const res = await fetch(
-        `https://local-hospital-server.vercel.app/myappointments/${user.email}`
+        `https://local-hospital-server.vercel.app/myappointments/${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -36,7 +36,7 @@ const MyAppointment = () => {
     }
   };
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto mt-5">
       <table className="lg:min-w-[1240px] mx-auto divide-y divide-gray-200 text-sm">
         <thead className="bg-gray-100">
           <tr>
@@ -56,7 +56,7 @@ const MyAppointment = () => {
               Time
             </th>
             <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900">
-              action
+              Action
             </th>
           </tr>
         </thead>

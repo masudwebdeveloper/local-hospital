@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useAdmin from "../../hooks/useAdmin/useAdmin";
+import logo from "../../assets/images/doctors-portal-logo.png";
 
 const Navber = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ const Navber = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        navigate('/')
+        navigate("/");
         window.location.reload();
       })
       .catch((err) => console.error(err.message));
@@ -28,21 +29,7 @@ const Navber = () => {
             title="Company"
             className="inline-flex items-center"
           >
-            <svg
-              className="w-8 text-teal-accent-400"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeMiterlimit="10"
-              stroke="currentColor"
-              fill="none"
-            >
-              <rect x="3" y="1" width="7" height="12" />
-              <rect x="3" y="17" width="7" height="6" />
-              <rect x="14" y="1" width="7" height="6" />
-              <rect x="14" y="11" width="7" height="12" />
-            </svg>
+            <img className="w-6 h-6" src={logo} alt="doctors-portal-logo" />
             <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
               Doctors Portal
             </span>
@@ -53,7 +40,11 @@ const Navber = () => {
                 to="/"
                 ariaLabel="Our product"
                 title="Home"
-                className={({isActive})=> isActive ? 'font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2' : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2"
+                    : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
+                }
               >
                 Home
               </NavLink>
@@ -65,7 +56,11 @@ const Navber = () => {
                   to="/allusers"
                   ariaLabel="allusers"
                   title="Allusers"
-                  className={({isActive})=> isActive ? 'font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2' : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2"
+                      : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
+                  }
                 >
                   All Users
                 </NavLink>
@@ -76,7 +71,11 @@ const Navber = () => {
                 to="/doctors"
                 ariaLabel="About us"
                 title="Doctors"
-                className={({isActive})=> isActive ? 'font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2' : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2"
+                    : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
+                }
               >
                 Doctors
               </NavLink>
@@ -86,7 +85,11 @@ const Navber = () => {
                 to="/myappointments"
                 ariaLabel="About us"
                 title="My Appointment"
-                className={({isActive})=> isActive ? 'font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2' : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2"
+                    : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
+                }
               >
                 My Appointment
               </NavLink>
@@ -97,7 +100,11 @@ const Navber = () => {
                   to="/allappointments"
                   ariaLabel="About us"
                   title="My Appointment"
-                  className={({isActive})=> isActive ? 'font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2' : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400 border-b-2 pb-2"
+                      : "hover:border-b-2 pb-2 font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
+                  }
                 >
                   All Appointments
                 </NavLink>
@@ -109,7 +116,7 @@ const Navber = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-blue-800 transition duration-200 rounded shadow-md bg-white hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                   ariaLabel="Sign Out"
                   title="Sign Out"
                 >
@@ -136,7 +143,7 @@ const Navber = () => {
               className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
               onClick={() => setIsMenuOpen(true)}
             >
-              <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+              <svg className="w-5 text-gray-50" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
                   d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
@@ -163,7 +170,7 @@ const Navber = () => {
                         className="inline-flex items-center"
                       >
                         <svg
-                          className="w-8 text-deep-purple-accent-400"
+                          className="w-8 text-white"
                           viewBox="0 0 24 24"
                           strokeLinejoin="round"
                           strokeWidth="2"
@@ -210,16 +217,18 @@ const Navber = () => {
                           Home
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          to="/"
-                          ariaLabel="Our product"
-                          title="contact"
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          Contact
-                        </NavLink>
-                      </li>
+                      {isAdmin && (
+                        <li>
+                          <NavLink
+                            to="/allusers"
+                            ariaLabel="Our product"
+                            title="contact"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            All Users
+                          </NavLink>
+                        </li>
+                      )}
                       <li>
                         <NavLink
                           to="/doctors"
@@ -240,16 +249,41 @@ const Navber = () => {
                           My Appointment
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          to="/register"
-                          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          ariaLabel="Sign up"
-                          title="Sign up"
-                        >
-                          Sign up
-                        </NavLink>
-                      </li>
+                      {isAdmin && (
+                        <li>
+                          <NavLink
+                            to="/allappointments"
+                            ariaLabel="About us"
+                            title="my appointment"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            All Appointments
+                          </NavLink>
+                        </li>
+                      )}
+                      {user ? (
+                        <li>
+                          <NavLink
+                            onClick={handleLogout}
+                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-gray-800 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                            ariaLabel="Sign Out"
+                            title="Sign Out"
+                          >
+                            Sign Out
+                          </NavLink>
+                        </li>
+                      ) : (
+                        <li>
+                          <NavLink
+                            to="/register"
+                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-gray-800 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                            ariaLabel="Sign up"
+                            title="Sign up"
+                          >
+                            Sign up
+                          </NavLink>
+                        </li>
+                      )}
                     </ul>
                   </nav>
                 </div>
