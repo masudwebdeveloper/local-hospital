@@ -1,18 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
-const MyAppointment = () => {
-  const { user } = useContext(AuthContext);
-  const { data: myAppointments = [], refetch } = useQuery({
-    queryKey: ["myAppointments"],
+const AllAppointments = () => {
+  const { data: allappointments = [], refetch } = useQuery({
+    queryKey: ["allappointments"],
     queryFn: async () => {
       const res = await fetch(
-        `https://local-hospital-server.vercel.app/myappointments/${user.email}`
+        "https://local-hospital-server.vercel.app/allappointments"
       );
-      const data = await res.json();
+      const data = res.json();
       return data;
     },
   });
@@ -28,7 +25,7 @@ const MyAppointment = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            toast.success("your appointment successfully cancel");
+            toast.success("appointment successfully cancel");
             refetch();
           }
         })
@@ -62,7 +59,7 @@ const MyAppointment = () => {
         </thead>
 
         <tbody className="divide-y divide-gray-200">
-          {myAppointments.map((appointment) => (
+          {allappointments.map((appointment) => (
             <tr>
               <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                 {appointment.name}
@@ -86,12 +83,6 @@ const MyAppointment = () => {
                 >
                   Delete
                 </button>
-                <Link
-                  className="text-green-600 hover:bg-gray-200 p-1 rounded-sm hover:text-green-800"
-                  to={`/updateappointment/${appointment._id}`}
-                >
-                  Edit
-                </Link>
               </td>
             </tr>
           ))}
@@ -101,4 +92,4 @@ const MyAppointment = () => {
   );
 };
 
-export default MyAppointment;
+export default AllAppointments;

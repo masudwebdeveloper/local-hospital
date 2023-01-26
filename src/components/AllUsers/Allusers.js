@@ -4,12 +4,13 @@ import { toast } from "react-hot-toast";
 import Modal from "../Modal/Modal";
 
 const Allusers = () => {
-    const [user, setUser] = useState(null)
-    const [modalOpen, setModalOpen] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null);
   const { data: allusers = [], refetch } = useQuery({
     queryKey: ["allusers"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allusers");
+      const res = await fetch(
+        "https://local-hospital-server.vercel.app/allusers"
+      );
       const data = await res.json();
       return data;
     },
@@ -20,7 +21,7 @@ const Allusers = () => {
       "are you sure do you wanna delete this user"
     );
     if (process) {
-      fetch(`http://localhost:5000/user/${id}`, {
+      fetch(`https://local-hospital-server.vercel.app/user/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -67,7 +68,11 @@ const Allusers = () => {
                 >
                   Delete
                 </button>
-                <label onClick={()=>setUser(user)} htmlFor="modalOpen" className="mr-5 hover:bg-gray-200 p-1 rounded-sm text-green-500 hover:text-green-700 ">
+                <label
+                  onClick={() => setCurrentUser(user)}
+                  htmlFor="modalOpen"
+                  className="mr-5 hover:bg-gray-200 p-1 rounded-sm text-green-500 hover:text-green-700 "
+                >
                   Edit
                 </label>
               </td>
@@ -75,9 +80,13 @@ const Allusers = () => {
           ))}
         </tbody>
       </table>
-      {
-        user && <Modal refetch={refetch}  user={user} setUser={setUser}></Modal>
-      }
+      {currentUser && (
+        <Modal
+          refetch={refetch}
+          user={currentUser}
+          setUser={setCurrentUser}
+        ></Modal>
+      )}
     </div>
   );
 };

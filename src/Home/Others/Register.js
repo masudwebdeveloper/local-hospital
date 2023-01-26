@@ -7,8 +7,9 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
   const [check, setCheck] = useState(true);
+  const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const { createUser,updateUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -21,42 +22,43 @@ const Register = () => {
 
   const onSubmit = (data) => {
     setPasswordError("");
-    const { name, number, email, password, confirmPassword } = data;
+    setError("");
+    const { name, email, password, confirmPassword } = data;
     if (password !== confirmPassword) {
       setPasswordError("Password don't match");
       return;
     }
-    createUser(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-      navigate('/login')
-      updateUser({displayName: name})
-      .then(()=>{
-        console.log("Update profile name");
-        const userData = {
-          name: user.displayName,
-          email: user.email
-          
-        }
-        saveUser(userData)
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate("/login");
+        updateUser({ displayName: name }).then(() => {
+          console.log("Update profile name");
+          const userData = {
+            name: user.displayName,
+            email: user.email,
+          };
+          saveUser(userData);
+        });
       })
-    })
-    .catch(err=> console.error(err))
-    console.log(name, number, email, password, confirmPassword);
+      .catch((err) => {
+        setError(err.message);
+      });
   };
 
-  const saveUser = (userData) =>{
-    fetch('http://localhost:5000/user',{
-      method: 'POST',
+  const saveUser = (userData) => {
+    fetch("https://local-hospital-server.vercel.app/user", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err.message))
-  }
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
   return (
     <div className="">
       <div className="lg:max-w-[1350px] mx-auto py-5">
@@ -103,6 +105,9 @@ const Register = () => {
               required
               {...register("confirmPassword")}
             />
+            <p className="text-red-500">
+              <small>{error}</small>
+            </p>
             <div>
               <span className="text-red-500">{passwordError}</span>
             </div>

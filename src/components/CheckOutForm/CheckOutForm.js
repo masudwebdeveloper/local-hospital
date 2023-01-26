@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const CheckOutForm = () => {
   const doctor = useLoaderData();
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   console.log(doctor, user);
   const { register, handleSubmit } = useForm();
@@ -39,21 +39,20 @@ const CheckOutForm = () => {
       time,
     };
 
-    fetch('http://localhost:5000/appointments',{
-      method: 'POST',
+    fetch("https://local-hospital-server.vercel.app/appointments", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
-      body: JSON.stringify(appointmentData)
+      body: JSON.stringify(appointmentData),
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data.acknowledged){
-        navigate('/myappointments')
-      }
-    })
-    .catch(err=> console.error(err))
-
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          navigate("/myappointments");
+        }
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <div className="w-3/5 mx-auto bg-gray-300 p-10 text-center mt-10 rounded">
@@ -110,7 +109,6 @@ const CheckOutForm = () => {
               required
               {...register("specialty")}
             />
-            
           </div>
           <div className="w-1/2">
             <label htmlFor="">
@@ -130,12 +128,12 @@ const CheckOutForm = () => {
               Gender <span className="text-red-500">*</span>
             </label>
             <select
-              {...register("gender", {required: true})}
+              {...register("gender", { required: true })}
               name="gender"
               required="required"
               className="select select-bordered mt-2 w-full mb-3"
             >
-              <option value='' disabled selected>
+              <option value="" disabled selected>
                 Gender
               </option>
               <option value="Male">Male</option>
@@ -145,13 +143,13 @@ const CheckOutForm = () => {
               Date <span className="text-red-500">*</span>
             </label>
             <div className="flex mb-3">
-            <select
+              <select
                 name="month"
                 required="required"
-                {...register("month", {required: true})}
+                {...register("month", { required: true })}
                 className="select select-bordered mt-2"
               >
-                <option value='' disabled selected>
+                <option value="" disabled selected>
                   Month
                 </option>
                 <option value="Jan">Jan</option>
@@ -171,9 +169,9 @@ const CheckOutForm = () => {
                 name="day"
                 required="required"
                 className="select select-bordered mt-2 ml-2"
-                {...register("day", {required: true})}
+                {...register("day", { required: true })}
               >
-                <option value='' disabled selected>
+                <option value="" disabled selected>
                   Day
                 </option>
                 {[...Array(31).keys()].map((i) => (
@@ -181,30 +179,30 @@ const CheckOutForm = () => {
                 ))}
               </select>
               <select
-                {...register("year", {required: true})}
+                {...register("year", { required: true })}
                 name="year"
                 required="required"
                 className="select select-bordered mt-2 ml-2"
-                
               >
-                <option value='' disabled selected>year</option>
-                <option value='2023'>2023</option>
-                <option value='2024'>2024</option>
-                <option value='2025'>2025</option>
+                <option value="" disabled selected>
+                  year
+                </option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
               </select>
             </div>
             <label htmlFor="">
               Time <span className="text-red-500">*</span>
             </label>
             <div className="flex">
-            <select
-                {...register("hour", {required: true})}
+              <select
+                {...register("hour", { required: true })}
                 name="hour"
                 required="required"
                 className="select select-bordered mt-2"
-                
               >
-                <option value='' disabled selected>
+                <option value="" disabled selected>
                   Hours
                 </option>
                 {[...Array(12).keys()].map((i) => (
@@ -214,11 +212,10 @@ const CheckOutForm = () => {
               <select
                 name="minute"
                 required="required"
-                {...register("minute", {required: true})}
+                {...register("minute", { required: true })}
                 className="select select-bordered mt-2 ml-2"
-                
               >
-                <option value='' disabled selected>
+                <option value="" disabled selected>
                   Min
                 </option>
                 {[...Array(13).keys()].map((i) => (
@@ -226,14 +223,15 @@ const CheckOutForm = () => {
                 ))}
               </select>
               <select
-                {...register("ampm", {required: true})}
+                {...register("ampm", { required: true })}
                 name="ampm"
                 required="required"
                 className="select select-bordered mt-2 ml-2"
-                
               >
-                <option value='AM' selected>AM</option>
-                <option value='PM'>PM</option>
+                <option value="AM" selected>
+                  AM
+                </option>
+                <option value="PM">PM</option>
               </select>
             </div>
           </div>

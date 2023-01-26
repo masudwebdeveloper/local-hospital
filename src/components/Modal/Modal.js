@@ -1,14 +1,16 @@
 import React from "react";
 
-const Modal = ({ user,setUser, refetch }) => {
+const Modal = ({ user, setUser, refetch }) => {
+  console.log(user);
   const handleEdit = (e) => {
     e.preventDefault();
+    const form = e.target;
     const userData = {
-        name: e.target.name.value,
-        email: e.target.email.value
-    }
+      name: form.name.value,
+      email: form.email.value,
+    };
     console.log(userData);
-    fetch(`http://localhost:5000/user/${user._id}`, {
+    fetch(`https://local-hospital-server.vercel.app/user/${user._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -18,8 +20,10 @@ const Modal = ({ user,setUser, refetch }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setUser(null)
+        setUser(null);
         refetch();
+        // window.location.reload();
+        form.reset();
       })
       .catch((err) => console.error(err));
   };
@@ -39,24 +43,26 @@ const Modal = ({ user,setUser, refetch }) => {
             ✕
           </label>
           <form onSubmit={handleEdit}>
-            <label htmlFor="name"><strong>Name:</strong></label>
+            <label htmlFor="name">
+              <strong>Name:</strong>
+            </label>
             <input
               type="text"
               name="name"
               defaultValue={user?.name}
-              className='input input-bordered my-5 w-full'
+              className="input input-bordered my-5 w-full"
             />
             <br />
-            <label htmlFor="email"><strong>Email:</strong></label>
+            <label htmlFor="email">
+              <strong>Email:</strong>
+            </label>
             <input
               type="email"
               name="email"
               className="input input-bordered my-5 w-full"
               defaultValue={user?.email}
             />
-            <button className="btn btn-success ml-48">
-                Save
-            </button>
+            <button className="btn btn-success ml-48">Save</button>
           </form>
         </div>
       </div>

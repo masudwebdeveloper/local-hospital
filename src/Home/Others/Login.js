@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import SocialLink from "../Share/SocialLink";
 
 const Login = () => {
   const {Login} = useContext(AuthContext);
   const [check, setCheck] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
   const handleCheck = () => {
     setCheck(!check);
   };
@@ -16,15 +19,18 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
 
   const handleSignIn = (data) => {
+    setError('')
     const { email, password } = data;
     console.log(email, password);
     Login(email, password)
     .then(result => {
       const user = result.user;
       console.log(user);
-      navigate('/')
+      navigate(from, {replace: true})
     })
-    .catch(err => console.error(err.message))
+    .catch(err => {
+      setError(err.message)
+    })
 
   };
 
@@ -50,6 +56,7 @@ const Login = () => {
               required
               {...register("password")}
             />
+            <p className="text-red-500"><small>{error}</small></p>
             <div className="border-t-2 mt-5 w-4/5 mx-auto"></div>
             <div className="flex w-4/5 justify-between mt-4 mx-auto">
               <div className="flex items-center">
