@@ -33,11 +33,30 @@ const Register = () => {
       updateUser({displayName: name})
       .then(()=>{
         console.log("Update profile name");
+        const userData = {
+          name: user.displayName,
+          email: user.email
+          
+        }
+        saveUser(userData)
       })
     })
     .catch(err=> console.error(err))
     console.log(name, number, email, password, confirmPassword);
   };
+
+  const saveUser = (userData) =>{
+    fetch('http://localhost:5000/user',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err.message))
+  }
   return (
     <div className="">
       <div className="lg:max-w-[1350px] mx-auto py-5">

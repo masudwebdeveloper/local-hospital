@@ -1,3 +1,4 @@
+import Allusers from "../components/AllUsers/Allusers";
 import CheckOutForm from "../components/CheckOutForm/CheckOutForm";
 import Doctors from "../components/Doctors/Doctors";
 import MyAppointment from "../components/MyAppointment/MyAppointment";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
                 path: '/updateappointment/:id',
                 element: <UpdateAppointment></UpdateAppointment>,
                 loader: ({params}) => fetch(`http://localhost:5000/myappointment/${params.id}`)
+            },
+            {
+                path: '/allusers',
+                element: <Allusers></Allusers>
             }
         ]
     }

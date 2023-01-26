@@ -47,12 +47,12 @@ const Navber = () => {
                   
                   <li>
                     <NavLink
-                      href="/"
-                      ariaLabel="Product pricing"
-                      title="Contact"
+                      to="/allusers"
+                      ariaLabel="allusers"
+                      title="Allusers"
                       className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                     >
-                      Contact
+                      All Users
                     </NavLink>
                   </li>
                   <li>
